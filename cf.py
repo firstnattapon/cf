@@ -42,7 +42,6 @@ if uploaded_file is not None:
     axs[2].plot(20)
     axs[2].plot(0)
     st.pyplot()
-    if st.checkbox('I agree'):
+    if st.checkbox('dataframe'):
         df = df.sort_index(ascending=False)
         st.write(df)
-
