@@ -9,6 +9,7 @@ uploaded_file = st.file_uploader("json file", type="json")
 if uploaded_file is not None:
     df = pd.read_json(uploaded_file)
     df = pd.json_normalize(df['messages'])
+    Market = df['from'].values[-1]
     dd = df['text']
     dd = dd.str.split("current_order:" , expand=True)
     dd = dd[1]
@@ -30,11 +31,12 @@ if uploaded_file is not None:
     df['cf'] =   df.shift(0) - df.shift(1) ; df['cf'][0] = df['cumsum'][0]
     df['avg'] =  df.cf.mean()
     df['dd'] = np.max(dd)
-#     st.write('cumsum :{}'.format(df.avg[-1]))
-#     st.write('cf  :{}'.format(df.cf[-1]))
-#     st.write('avg :{}'.format(df.avg[-1]))
-#     st.write('dd  :{}'.format(df.dd[-1]))
-    _ , axs = plt.subplots(3 , figsize=(15 ,15))
+    st.write('cumsum :{}'.format(df['cumsum'].values[-1]))
+    st.write('cf  :{}'.format(df['cf'].values[-1]))
+    st.write('avg :{}'.format(df['avg'].values[-1]))
+    st.write('dd  :{}'.format(df['dd'].values[-1]))
+    fig , axs = plt.subplots(3 , figsize=(15 ,15))
+    fig.suptitle(Market)
     axs[0].plot(df['cumsum'])
     axs[1].bar( df.index , height= df['cf'].T )
     axs[1].plot(df['avg'])
