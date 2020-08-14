@@ -3,6 +3,7 @@ import numpy as np
 from pandas.io.json import json_normalize
 import matplotlib.pyplot as plt
 import streamlit as st
+st.set_option('deprecation.showfileUploaderEncoding', False)
 
 uploaded_file = st.file_uploader("json file", type="json")
 if uploaded_file is not None:
@@ -29,6 +30,10 @@ if uploaded_file is not None:
     df['cf'] =   df.shift(0) - df.shift(1) ; df['cf'][0] = df['cumsum'][0]
     df['avg'] =  df.cf.mean()
     df['dd'] = np.max(dd)
+    st.write('cumsum :{}'.format(df['avg'][-1]))
+    st.write('cf  :{}'.format(df['cf'][-1]))
+    st.write('avg :{}'.format(df['avg'][-1]))
+    st.write('dd  :{}'.format(df['dd'][-1]))
     _ , axs = plt.subplots(3 , figsize=(15 ,15))
     axs[0].plot(df['cumsum'])
     axs[1].bar( df.index , height= df['cf'].T )
@@ -37,5 +42,7 @@ if uploaded_file is not None:
     axs[2].plot(20)
     axs[2].plot(0)
     st.pyplot()
-    df = df.sort_index(ascending=False)
-    st.write(df)
+    if st.checkbox('I agree'):
+        df = df.sort_index(ascending=False)
+        st.write(df)
+
