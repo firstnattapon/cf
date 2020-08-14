@@ -7,8 +7,8 @@ import io
 
 uploaded_file = st.file_uploader("json file", type="json")
 text_io = io.TextIOWrapper(uploaded_file)
-if uploaded_file is not None:
-    df = pd.read_json(uploaded_file)
+if text_io is not None:
+    df = pd.read_json(text_io)
     df = pd.json_normalize(df['messages'])
     dd = df['text']
     dd = dd.str.split("current_order:" , expand=True)
