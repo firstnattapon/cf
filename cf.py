@@ -3,8 +3,10 @@ import numpy as np
 from pandas.io.json import json_normalize
 import matplotlib.pyplot as plt
 import streamlit as st
+import io
 
 uploaded_file = st.file_uploader("json file", type="json")
+text_io = io.TextIOWrapper(uploaded_file)
 if uploaded_file is not None:
     df = pd.read_json(uploaded_file)
     df = pd.json_normalize(df['messages'])
