@@ -3,7 +3,7 @@ import numpy as np
 from pandas.io.json import json_normalize
 import matplotlib.pyplot as plt
 import streamlit as st
-pd.set_option("display.precision", 3)
+pd.set_option("display.precision", 1)
 st.set_option('deprecation.showfileUploaderEncoding', False)
 
 uploaded_file = st.file_uploader("json file", type="json")
