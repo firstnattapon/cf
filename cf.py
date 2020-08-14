@@ -34,7 +34,6 @@ if uploaded_file is not None:
     st.write('Market : ', Market)
     st.write('number : ', round(df.index.values[-1] , 2))
     st.write('cumsum : ', round(df['cumsum'].values[-1] , 2))
-    st.write('cf     : ', round(df['cf'].values[-1] , 2))
     st.write('avg    : ', round(df['avg'].values[-1] , 2))
     st.write('dd     : ', round(df['dd'].values[-1] , 2))
     _ , axs = plt.subplots(3 , figsize=(15 ,15))
