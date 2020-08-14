@@ -3,6 +3,7 @@ import numpy as np
 from pandas.io.json import json_normalize
 import matplotlib.pyplot as plt
 import streamlit as st
+pd.set_option("display.precision", 3)
 st.set_option('deprecation.showfileUploaderEncoding', False)
 
 uploaded_file = st.file_uploader("json file", type="json")
@@ -31,13 +32,13 @@ if uploaded_file is not None:
     df['cf'] =   df.shift(0) - df.shift(1) ; df['cf'][0] = df['cumsum'][0]
     df['avg'] =  df.cf.mean()
     df['dd'] = np.max(dd)
+    st.write('Market : ', Market)
     st.write('number : ', (df.index.values[-1]))
     st.write('cumsum : ', (df['cumsum'].values[-1]))
     st.write('cf     : ', (df['cf'].values[-1]))
     st.write('avg    : ', (df['avg'].values[-1]))
     st.write('dd     : ', (df['dd'].values[-1]))
-    fig , axs = plt.subplots(3 , figsize=(15 ,15))
-    fig.suptitle(Market)
+    _ , axs = plt.subplots(3 , figsize=(15 ,15))
     axs[0].plot(df['cumsum'])
     axs[1].bar( df.index , height= df['cf'].T )
     axs[1].plot(df['avg'])
