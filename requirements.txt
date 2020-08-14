@@ -1,0 +1,8 @@
+streamlit 
+pandas  
+ccxt  
+matplotlib  
+seaborn 
+numpy 
+scikit-learn
+marketprofile
