@@ -46,7 +46,7 @@ if uploaded_file is not None:
     axs[2].plot(0)
     st.pyplot()
     st.write(df.tail(1))
-    csv = df.to_csv(index=False)
+    csv = df.to_csv(index=True)
     b64 = base64.b64encode(csv.encode()).decode()
     href = f'<a href="data:file/csv;base64,{b64}">Download CSV File</a>'
     st.markdown(href, unsafe_allow_html=True)
