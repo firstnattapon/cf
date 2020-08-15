@@ -3,6 +3,7 @@ import numpy as np
 from pandas.io.json import json_normalize
 import matplotlib.pyplot as plt
 import streamlit as st
+import base64
 st.set_option('deprecation.showfileUploaderEncoding', False)
 
 uploaded_file = st.file_uploader("json file", type="json")
@@ -44,6 +45,8 @@ if uploaded_file is not None:
     axs[2].plot(20)
     axs[2].plot(0)
     st.pyplot()
-    if st.checkbox('dataframe'):
-        df = df.sort_index(ascending=False)
-        st.write(df)
+    st.write(df.tail(1))
+    csv = df.to_csv(index=False)
+    b64 = base64.b64encode(csv.encode()).decode()
+    href = f'<a href="data:file/csv;base64,{b64}">Download CSV File</a>'
+    st.markdown(href, unsafe_allow_html=True)
