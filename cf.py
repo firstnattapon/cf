@@ -61,8 +61,9 @@ LINK = json(LINK)
 ALGO = json(ALGO)
 ADA = json(ADA)
 
-df = pd.concat([TOMO, THETA , LINK , ALGO , ADA] ,  axis=1)
-csv = df.to_csv(index=True)
-b64 = base64.b64encode(csv.encode()).decode()
-href = f'<a href="data:file/csv;base64,{b64}">Download CSV File</a>'
-st.markdown(href, unsafe_allow_html=True)
+if TOMO & THETA & LINK & ALGO & ADA is not None:
+    df = pd.concat([TOMO, THETA , LINK , ALGO , ADA] ,  axis=1)
+    csv = df.to_csv(index=True)
+    b64 = base64.b64encode(csv.encode()).decode()
+    href = f'<a href="data:file/csv;base64,{b64}">Download CSV File</a>'
+    st.markdown(href, unsafe_allow_html=True)
