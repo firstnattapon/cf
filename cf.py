@@ -6,12 +6,6 @@ import streamlit as st
 import base64
 st.set_option('deprecation.showfileUploaderEncoding', False)
 
-TOMO = st.file_uploader("TOMO", type="json")
-THETA = st.file_uploader("THETA", type="json")
-LINK = st.file_uploader("LINK", type="json")
-ALGO = st.file_uploader("ALGO", type="json")
-ADA = st.file_uploader("ADA", type="json")
-
 def json (json):
     if json is not None:
         df = pd.read_json(json)
@@ -34,17 +28,17 @@ def json (json):
         df = np.cumsum(df)
         df = df.dropna()
         df = df.reset_index(drop=True)
-        df = df.to_frame('cumsum'+Market)
-        df['cf'] =   df.shift(0) - df.shift(1) ; df['cf'][0] = df['cumsum'+Market][0]
+        df = df.to_frame('cumsum-'+Market)
+        df['cf'] =   df.shift(0) - df.shift(1) ; df['cf'][0] = df['cumsum-'+Market][0]
         df['avg'] =  df.cf.mean()
         df['dd'] = np.max(dd)
         st.write('Market : ', Market)
         st.write('number : ', round(df.index.values[-1] , 2))
-        st.write('cumsum : ', round(df['cumsum'+Market].values[-1] , 2))
+        st.write('cumsum : ', round(df['cumsum-'+Market].values[-1] , 2))
         st.write('avg    : ', round(df['avg'].values[-1] , 2))
         st.write('dd     : ', round(df['dd'].values[-1] , 2))
         _ , axs = plt.subplots(3 , figsize=(15 ,15))
-        axs[0].plot(df['cumsum'+Market])
+        axs[0].plot(df['cumsum-'+Market])
         axs[1].bar( df.index , height= df['cf'].T )
         axs[1].plot(df['avg'])
         axs[2].plot(df['dd'])
@@ -55,6 +49,13 @@ def json (json):
         st.write('_'*50)
         return df
     
+TOMO = st.file_uploader("TOMO", type="json")
+THETA = st.file_uploader("THETA", type="json")
+LINK = st.file_uploader("LINK", type="json")
+ALGO = st.file_uploader("ALGO", type="json")
+ADA = st.file_uploader("ADA", type="json")
+
+
 TOMO = json(TOMO)
 THETA = json(THETA)
 LINK = json(LINK)
