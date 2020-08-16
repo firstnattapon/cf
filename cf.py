@@ -61,7 +61,7 @@ LINK = json(LINK_up)
 ALGO = json(ALGO_up)
 ADA = json(ADA_up)
 
-if TOMO_up & THETA_up & LINK_up & ALGO_up & ADA_up is not None:
+if TOMO_up and THETA_up and LINK_up and ALGO_up and ADA_up != None:
     df = pd.concat([TOMO, THETA , LINK , ALGO , ADA] ,  axis=1)
     csv = df.to_csv(index=True)
     b64 = base64.b64encode(csv.encode()).decode()
