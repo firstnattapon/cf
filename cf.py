@@ -52,6 +52,7 @@ def json (json):
         axs[2].plot(0)
         st.pyplot()
         st.write(df.tail(1))
+        st.write('_'*50)
         return df
     
 TOMO = json(TOMO)
