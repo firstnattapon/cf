@@ -55,11 +55,14 @@ LINK_up = st.file_uploader("LINK", type="json")
 ALGO_up = st.file_uploader("ALGO", type="json")
 ADA_up = st.file_uploader("ADA", type="json")
 
-TOMO = json(TOMO_up)
-THETA = json(THETA_up)
-LINK = json(LINK_up)
-ALGO = json(ALGO_up)
-ADA = json(ADA_up)
+
+agree = st.checkbox('pyplot')
+if agree:
+    TOMO = json(TOMO_up)
+    THETA = json(THETA_up)
+    LINK = json(LINK_up)
+    ALGO = json(ALGO_up)
+    ADA = json(ADA_up)
 
 if TOMO_up and THETA_up and LINK_up and ALGO_up and ADA_up != None:
     df = pd.concat([TOMO, THETA , LINK , ALGO , ADA] ,  axis=1)
