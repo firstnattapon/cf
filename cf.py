@@ -49,11 +49,11 @@ def json (json):
         st.write('_'*50)
         return df
     
-TOMO = st.file_uploader("TOMO", type="json")
-THETA = st.file_uploader("THETA", type="json")
-LINK = st.file_uploader("LINK", type="json")
-ALGO = st.file_uploader("ALGO", type="json")
-ADA = st.file_uploader("ADA", type="json")
+TOMO_up = st.file_uploader("TOMO", type="json")
+THETA_up = st.file_uploader("THETA", type="json")
+LINK_up = st.file_uploader("LINK", type="json")
+ALGO_up = st.file_uploader("ALGO", type="json")
+ADA_up = st.file_uploader("ADA", type="json")
 
 TOMO = json(TOMO)
 THETA = json(THETA)
@@ -61,7 +61,7 @@ LINK = json(LINK)
 ALGO = json(ALGO)
 ADA = json(ADA)
 
-if TOMO & THETA & LINK & ALGO & ADA is not None:
+if TOMO_up & THETA_up & LINK_up & ALGO_up & ADA_up is not None:
     df = pd.concat([TOMO, THETA , LINK , ALGO , ADA] ,  axis=1)
     csv = df.to_csv(index=True)
     b64 = base64.b64encode(csv.encode()).decode()
