@@ -32,11 +32,6 @@ def json (json):
         df['cf'] =   df.shift(0) - df.shift(1) ; df['cf'][0] = df['cumsum-'+Market][0]
         df['avg'] =  df.cf.mean()
         df['dd'] = np.max(dd)
-        st.write('Market : ', Market)
-        st.write('number : ', round(df.index.values[-1] , 2))
-        st.write('cumsum : ', round(df['cumsum-'+Market].values[-1] , 2))
-        st.write('avg    : ', round(df['avg'].values[-1] , 2))
-        st.write('dd     : ', round(df['dd'].values[-1] , 2))
         _ , axs = plt.subplots(3 , figsize=(15 ,15))
         axs[0].plot(df['cumsum-'+Market])
         axs[1].bar( df.index , height= df['cf'].T )
@@ -46,6 +41,11 @@ def json (json):
         axs[2].plot(0)
         agree = st.checkbox(Market)
         if agree:
+            st.write('Market : ', Market)
+            st.write('number : ', round(df.index.values[-1] , 2))
+            st.write('cumsum : ', round(df['cumsum-'+Market].values[-1] , 2))
+            st.write('avg    : ', round(df['avg'].values[-1] , 2))
+            st.write('dd     : ', round(df['dd'].values[-1] , 2))
             st.pyplot()
             st.write(df.tail(1))
             st.write('_'*50)
@@ -63,6 +63,7 @@ LINK = json(LINK_up)
 ALGO = json(ALGO_up)
 ADA = json(ADA_up)
 
+st.write('_'*50)
 if TOMO_up and THETA_up and LINK_up and ALGO_up and ADA_up != None:
     df = pd.concat([TOMO, THETA , LINK , ALGO , ADA] ,  axis=1)
     csv = df.to_csv(index=True)
