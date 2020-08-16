@@ -55,14 +55,14 @@ LINK = st.file_uploader("LINK", type="json")
 ALGO = st.file_uploader("ALGO", type="json")
 ADA = st.file_uploader("ADA", type="json")
 
-
 TOMO = json(TOMO)
 THETA = json(THETA)
 LINK = json(LINK)
 ALGO = json(ALGO)
 ADA = json(ADA)
-  
-# csv = df.to_csv(index=True)
-# b64 = base64.b64encode(csv.encode()).decode()
-# href = f'<a href="data:file/csv;base64,{b64}">Download CSV File</a>'
-# st.markdown(href, unsafe_allow_html=True)
+
+df = pd.concat([TOMO, THETA , LINK , ALGO , ADA], ignore_index=True)
+csv = df.to_csv(index=True)
+b64 = base64.b64encode(csv.encode()).decode()
+href = f'<a href="data:file/csv;base64,{b64}">Download CSV File</a>'
+st.markdown(href, unsafe_allow_html=True)
