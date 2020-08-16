@@ -44,9 +44,11 @@ def json (json):
         axs[2].plot(df['dd'])
         axs[2].plot(20)
         axs[2].plot(0)
-        st.pyplot()
-        st.write(df.tail(1))
-        st.write('_'*50)
+        agree = st.checkbox(Market)
+        if agree:
+            st.pyplot()
+            st.write(df.tail(1))
+            st.write('_'*50)
         return df
     
 TOMO_up = st.file_uploader("TOMO", type="json")
@@ -55,14 +57,11 @@ LINK_up = st.file_uploader("LINK", type="json")
 ALGO_up = st.file_uploader("ALGO", type="json")
 ADA_up = st.file_uploader("ADA", type="json")
 
-
-agree = st.checkbox('pyplot')
-if agree:
-    TOMO = json(TOMO_up)
-    THETA = json(THETA_up)
-    LINK = json(LINK_up)
-    ALGO = json(ALGO_up)
-    ADA = json(ADA_up)
+TOMO = json(TOMO_up)
+THETA = json(THETA_up)
+LINK = json(LINK_up)
+ALGO = json(ALGO_up)
+ADA = json(ADA_up)
 
 if TOMO_up and THETA_up and LINK_up and ALGO_up and ADA_up != None:
     df = pd.concat([TOMO, THETA , LINK , ALGO , ADA] ,  axis=1)
