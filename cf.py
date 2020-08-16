@@ -55,11 +55,11 @@ LINK_up = st.file_uploader("LINK", type="json")
 ALGO_up = st.file_uploader("ALGO", type="json")
 ADA_up = st.file_uploader("ADA", type="json")
 
-TOMO = json(TOMO)
-THETA = json(THETA)
-LINK = json(LINK)
-ALGO = json(ALGO)
-ADA = json(ADA)
+TOMO = json(TOMO_up)
+THETA = json(THETA_up)
+LINK = json(LINK_up)
+ALGO = json(ALGO_up)
+ADA = json(ADA_up)
 
 if TOMO_up & THETA_up & LINK_up & ALGO_up & ADA_up is not None:
     df = pd.concat([TOMO, THETA , LINK , ALGO , ADA] ,  axis=1)
